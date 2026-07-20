@@ -60,7 +60,7 @@ function HistoryPage() {
               return (
                 <div key={b.id} className="flex flex-col gap-4 overflow-hidden rounded-2xl border border-border/70 bg-card p-4 md:flex-row">
                   {d && (
-                    <img src={d.image} alt={d.destinationName} className="h-32 w-full shrink-0 rounded-xl object-cover md:h-24 md:w-40" />
+                    <img src={d.image} alt={b.destinationName} className="h-32 w-full shrink-0 rounded-xl object-cover md:h-24 md:w-40" />
                   )}
                   <div className="flex flex-1 flex-col">
                     <div className="flex flex-wrap items-center justify-between gap-2">

@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useRouter, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { SigapLayout } from "@/components/SigapLayout";
-import { crowdMeta, destinations, formatIDR } from "@/lib/mock-data";
+import { crowdMeta, destinations, formatIDR, type Destination } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/destinations/$id")({
 });
 
 function DestDetail() {
-  const d = Route.useLoaderData();
+  const d = Route.useLoaderData() as Destination;
   const router = useRouter();
   const c = crowdMeta[d.crowd.level];
   const pct = Math.round((d.crowd.occupancy / d.crowd.capacity) * 100);
