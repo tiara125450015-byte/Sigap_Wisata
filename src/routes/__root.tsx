@@ -74,20 +74,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Sigap Wisata — Platform Nasional Wisata Indonesia" },
+      { title: "Sigap Wisata — Satu Platform, Semua Wisata Indonesia" },
       {
         name: "description",
         content:
-          "Sigap Wisata: satu ekosistem digital untuk pemantauan kepadatan realtime, transparansi harga tiket dan fasilitas, peringatan dini cuaca, serta rekomendasi destinasi berbasis AI di seluruh Indonesia.",
+          "Kepadatan realtime, harga transparan, cuaca BMKG, dan rekomendasi AI untuk wisata di seluruh Indonesia.",
       },
-      { property: "og:title", content: "Sigap Wisata — Wisata Indonesia Lebih Aman & Transparan" },
+      { property: "og:title", content: "Sigap Wisata — Satu Platform, Semua Wisata Indonesia" },
       {
         property: "og:description",
         content:
-          "Booking, kepadatan realtime, harga transparan, peringatan cuaca BMKG, dan rekomendasi AI dalam satu platform.",
+          "Kepadatan realtime, harga transparan, cuaca BMKG, dan rekomendasi AI untuk wisata di seluruh Indonesia.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Sigap Wisata — Satu Platform, Semua Wisata Indonesia" },
+      { name: "twitter:description", content: "Kepadatan realtime, harga transparan, cuaca BMKG, dan rekomendasi AI untuk wisata di seluruh Indonesia." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f4bfd703-13b1-4988-b461-cbe085ffa52a/id-preview-5848a4ab--2071fb38-3754-444f-83e2-0892a0c356c5.lovable.app-1784529150726.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f4bfd703-13b1-4988-b461-cbe085ffa52a/id-preview-5848a4ab--2071fb38-3754-444f-83e2-0892a0c356c5.lovable.app-1784529150726.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
