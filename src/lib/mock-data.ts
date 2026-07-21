@@ -1,3 +1,6 @@
+import rajaAmpatAsset from "@/assets/raja-ampat.jpg.asset.json";
+import kawahPutihAsset from "@/assets/kawah-putih.jpg.asset.json";
+
 export type CrowdLevel = "sepi" | "sedang" | "padat" | "sangat_padat";
 
 export type Destination = {
