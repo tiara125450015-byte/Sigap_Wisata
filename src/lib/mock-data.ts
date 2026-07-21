@@ -148,7 +148,7 @@ export const destinations: Destination[] = [
     name: "Piaynemo - Raja Ampat",
     city: "Raja Ampat",
     province: "Papua Barat Daya",
-    image: img("photo-1516091380769-6b0a03d24186"),
+    image: rajaAmpatAsset.url,
     description: "Gugusan karst hijau di atas laut biru — surga tersembunyi di ujung timur Nusantara.",
     ticketPrice: 500000,
     rating: 4.95,
