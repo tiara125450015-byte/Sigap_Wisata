@@ -1,3 +1,6 @@
+import rajaAmpatAsset from "@/assets/raja-ampat.jpg.asset.json";
+import kawahPutihAsset from "@/assets/kawah-putih.jpg.asset.json";
+
 export type CrowdLevel = "sepi" | "sedang" | "padat" | "sangat_padat";
 
 export type Destination = {
@@ -145,7 +148,7 @@ export const destinations: Destination[] = [
     name: "Piaynemo - Raja Ampat",
     city: "Raja Ampat",
     province: "Papua Barat Daya",
-    image: img("photo-1516091380769-6b0a03d24186"),
+    image: rajaAmpatAsset.url,
     description: "Gugusan karst hijau di atas laut biru — surga tersembunyi di ujung timur Nusantara.",
     ticketPrice: 500000,
     rating: 4.95,
@@ -168,7 +171,7 @@ export const destinations: Destination[] = [
     name: "Kawah Putih Ciwidey",
     city: "Bandung",
     province: "Jawa Barat",
-    image: img("photo-1601370552761-3f47ee2f8c67"),
+    image: kawahPutihAsset.url,
     description: "Danau kawah belerang berwarna toska di kaki Gunung Patuha.",
     ticketPrice: 28000,
     rating: 4.4,
