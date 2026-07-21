@@ -74,7 +74,7 @@ function Welcome() {
           aria-hidden
         />
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-16 text-center md:py-24">
-          <div className="flex items-center gap-3 rounded-full bg-white/15 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-white ring-1 ring-white/25 backdrop-blur">
+          <div className="flex items-center gap-3 rounded-full bg-background/80 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground ring-1 ring-border/40 backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-brand animate-pulse" /> Platform Nasional Wisata Indonesia
           </div>
           <img
@@ -82,12 +82,12 @@ function Welcome() {
             alt="Logo Sigap Wisata"
             className="h-32 w-32 rounded-3xl object-cover shadow-2xl ring-4 ring-white/30 md:h-40 md:w-40"
           />
-          <div className="max-w-3xl space-y-4 text-white">
+          <div className="max-w-3xl space-y-4 text-foreground">
             <h1 className="text-4xl font-extrabold tracking-tight drop-shadow-sm md:text-6xl">
               Satu ekosistem, <br className="hidden md:block" />
               seluruh wisata Nusantara.
             </h1>
-            <p className="mx-auto max-w-2xl text-base text-white/85 md:text-lg">
+            <p className="mx-auto max-w-2xl text-base text-foreground/80 md:text-lg">
               Sigap Wisata menyatukan pemantauan kepadatan realtime, harga transparan, peringatan dini cuaca
               BMKG, dan rekomendasi berbasis AI — dalam satu aplikasi untuk wisatawan dan pengelola.
             </p>
@@ -100,20 +100,20 @@ function Welcome() {
               asChild
               size="lg"
               variant="outline"
-              className="border-white/40 bg-white/10 text-white hover:bg-white/20"
+              className="border-foreground/30 bg-background/70 text-foreground hover:bg-background/90"
             >
               <Link to="/destinations">Jelajahi Destinasi</Link>
             </Button>
           </div>
-          <div className="grid w-full max-w-3xl grid-cols-3 gap-4 pt-6 text-white/90">
+          <div className="grid w-full max-w-3xl grid-cols-3 gap-4 pt-6 text-foreground">
             {[
               ["6+", "Destinasi Aktif"],
               ["24/7", "Data Realtime"],
               ["BMKG", "Terintegrasi API"],
             ].map(([n, l]) => (
-              <div key={l} className="rounded-2xl bg-white/10 p-4 backdrop-blur ring-1 ring-white/15">
+              <div key={l} className="rounded-2xl bg-background/70 p-4 backdrop-blur ring-1 ring-border/40">
                 <div className="text-2xl font-bold md:text-3xl">{n}</div>
-                <div className="text-xs uppercase tracking-widest text-white/70">{l}</div>
+                <div className="text-xs uppercase tracking-widest text-foreground/70">{l}</div>
               </div>
             ))}
           </div>
