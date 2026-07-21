@@ -171,7 +171,7 @@ export const destinations: Destination[] = [
     name: "Kawah Putih Ciwidey",
     city: "Bandung",
     province: "Jawa Barat",
-    image: img("photo-1601370552761-3f47ee2f8c67"),
+    image: kawahPutihAsset.url,
     description: "Danau kawah belerang berwarna toska di kaki Gunung Patuha.",
     ticketPrice: 28000,
     rating: 4.4,
