@@ -3,13 +3,14 @@ import { useEffect, useState, type ReactNode } from "react";
 import logo from "@/assets/sigap-logo.jpg.asset.json";
 import { clearSession, getSession, type SessionUser } from "@/lib/session";
 import { Button } from "@/components/ui/button";
-import { Calendar, Compass, History, LogOut, Sparkles, Store } from "lucide-react";
+import { Building2, Calendar, Compass, History, LogOut, Sparkles, Store } from "lucide-react";
 
 const nav = [
   { to: "/dashboard", label: "Beranda", icon: Compass },
   { to: "/destinations", label: "Booking Wisata", icon: Calendar },
   { to: "/recommend", label: "Rekomendasi AI", icon: Sparkles },
   { to: "/register-business", label: "Daftar Usaha", icon: Store },
+  { to: "/operator", label: "Pengelola", icon: Building2 },
   { to: "/history", label: "Riwayat", icon: History },
 ];
 

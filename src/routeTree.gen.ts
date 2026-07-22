@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterBusinessRouteImport } from './routes/register-business'
 import { Route as RecommendRouteImport } from './routes/recommend'
+import { Route as OperatorRouteImport } from './routes/operator'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -26,6 +27,11 @@ const RegisterBusinessRoute = RegisterBusinessRouteImport.update({
 const RecommendRoute = RecommendRouteImport.update({
   id: '/recommend',
   path: '/recommend',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OperatorRoute = OperatorRouteImport.update({
+  id: '/operator',
+  path: '/operator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HistoryRoute = HistoryRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/operator': typeof OperatorRoute
   '/recommend': typeof RecommendRoute
   '/register-business': typeof RegisterBusinessRoute
   '/destinations/$id': typeof DestinationsIdRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/operator': typeof OperatorRoute
   '/recommend': typeof RecommendRoute
   '/register-business': typeof RegisterBusinessRoute
   '/destinations/$id': typeof DestinationsIdRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/operator': typeof OperatorRoute
   '/recommend': typeof RecommendRoute
   '/register-business': typeof RegisterBusinessRoute
   '/destinations/$id': typeof DestinationsIdRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/history'
+    | '/operator'
     | '/recommend'
     | '/register-business'
     | '/destinations/$id'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/history'
+    | '/operator'
     | '/recommend'
     | '/register-business'
     | '/destinations/$id'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/history'
+    | '/operator'
     | '/recommend'
     | '/register-business'
     | '/destinations/$id'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
   HistoryRoute: typeof HistoryRoute
+  OperatorRoute: typeof OperatorRoute
   RecommendRoute: typeof RecommendRoute
   RegisterBusinessRoute: typeof RegisterBusinessRoute
   DestinationsIdRoute: typeof DestinationsIdRoute
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/recommend'
       fullPath: '/recommend'
       preLoaderRoute: typeof RecommendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/operator': {
+      id: '/operator'
+      path: '/operator'
+      fullPath: '/operator'
+      preLoaderRoute: typeof OperatorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/history': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
   HistoryRoute: HistoryRoute,
+  OperatorRoute: OperatorRoute,
   RecommendRoute: RecommendRoute,
   RegisterBusinessRoute: RegisterBusinessRoute,
   DestinationsIdRoute: DestinationsIdRoute,
@@ -208,13 +229,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
