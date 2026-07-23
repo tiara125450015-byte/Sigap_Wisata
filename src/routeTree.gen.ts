@@ -18,6 +18,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsIdRouteImport } from './routes/destinations.$id'
+import { Route as ApiPublicDestinationsIdRouteImport } from './routes/api/public/destinations.$id'
 
 const RegisterBusinessRoute = RegisterBusinessRouteImport.update({
   id: '/register-business',
@@ -64,6 +65,11 @@ const DestinationsIdRoute = DestinationsIdRouteImport.update({
   path: '/destinations/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicDestinationsIdRoute = ApiPublicDestinationsIdRouteImport.update({
+  id: '/api/public/destinations/$id',
+  path: '/api/public/destinations/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/register-business': typeof RegisterBusinessRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/destinations/': typeof DestinationsIndexRoute
+  '/api/public/destinations/$id': typeof ApiPublicDestinationsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/register-business': typeof RegisterBusinessRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/destinations': typeof DestinationsIndexRoute
+  '/api/public/destinations/$id': typeof ApiPublicDestinationsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/register-business': typeof RegisterBusinessRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/destinations/': typeof DestinationsIndexRoute
+  '/api/public/destinations/$id': typeof ApiPublicDestinationsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/register-business'
     | '/destinations/$id'
     | '/destinations/'
+    | '/api/public/destinations/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/register-business'
     | '/destinations/$id'
     | '/destinations'
+    | '/api/public/destinations/$id'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/register-business'
     | '/destinations/$id'
     | '/destinations/'
+    | '/api/public/destinations/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   RegisterBusinessRoute: typeof RegisterBusinessRoute
   DestinationsIdRoute: typeof DestinationsIdRoute
   DestinationsIndexRoute: typeof DestinationsIndexRoute
+  ApiPublicDestinationsIdRoute: typeof ApiPublicDestinationsIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/destinations/$id': {
+      id: '/api/public/destinations/$id'
+      path: '/api/public/destinations/$id'
+      fullPath: '/api/public/destinations/$id'
+      preLoaderRoute: typeof ApiPublicDestinationsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterBusinessRoute: RegisterBusinessRoute,
   DestinationsIdRoute: DestinationsIdRoute,
   DestinationsIndexRoute: DestinationsIndexRoute,
+  ApiPublicDestinationsIdRoute: ApiPublicDestinationsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
