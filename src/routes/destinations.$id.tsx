@@ -49,12 +49,6 @@ function DestDetail() {
     updatedAt?: string;
   }>(null);
 
-  // Pull live overlay from MitraPoin via the public API gateway.
-  useState(() => 0); // placeholder to keep import
-  if (typeof window !== "undefined") {
-    // fetch once per mount
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-  }
 
   // Merge base + override for display
   const d: Destination = {
