@@ -184,11 +184,41 @@ function MitraPoinConsole() {
     setAll((prev) => ({ ...prev, [selectedId]: next }));
   };
 
-  const persist = () => {
-    const next = { ...all, [selectedId]: { ...data, updatedAt: "baru saja", synced: true } };
-    setAll(next);
-    saveAll(next);
-    toast.success("Data tersinkron ke jaringan Sigap Wisata");
+  const persist = async () => {
+    const paidRev = data.bookings
+      .filter((b) => b.status === "paid")
+      .reduce((s, b) => s + b.amount, 0);
+    try {
+      const res = await fetch(`/api/public/destinations/${selectedId}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-mitrapoin-key": "mp_demo_sigap_2026",
+        },
+        body: JSON.stringify({
+          ticketPrice: data.ticketPrice,
+          capacity: data.capacity,
+          occupancy: data.occupancy,
+          weatherNote: data.weatherNote,
+          facilities: data.facilities,
+          menu: data.menu,
+          bookingsSummary: {
+            total: data.bookings.length,
+            paid: data.bookings.filter((b) => b.status === "paid").length,
+            pending: data.bookings.filter((b) => b.status === "pending").length,
+            revenue: paidRev,
+          },
+        }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const next = { ...all, [selectedId]: { ...data, updatedAt: "baru saja", synced: true } };
+      setAll(next);
+      saveAll(next);
+      toast.success("Data terkirim via API ke jaringan Sigap Wisata");
+    } catch (e) {
+      toast.error("Gagal sinkron ke API Sigap Wisata");
+      console.error(e);
+    }
   };
 
   const addFacility = () =>
@@ -677,9 +707,10 @@ function MitraPoinConsole() {
           <div className="rounded-2xl bg-emerald-500/5 p-4 text-xs text-slate-300 ring-1 ring-emerald-400/20">
             <div className="font-semibold text-emerald-300">API Gateway aktif</div>
             <p className="mt-1 text-slate-400">
-              MitraPoin mengirim harga, kapasitas, cuaca, dan status booking ke Sigap Wisata melalui
-              endpoint <span className="font-mono text-slate-200">/v1/destinations/{dest.id}</span>.
-              Wisatawan melihat data terbaru begitu Anda menekan <span className="font-semibold text-emerald-300">Sinkronkan</span>.
+              MitraPoin adalah aplikasi independen. Sinkronisasi dilakukan via HTTP
+              <span className="font-mono text-slate-200"> POST /api/public/destinations/{dest.id}</span>
+              {" "}dengan header <span className="font-mono text-slate-200">x-mitrapoin-key</span>.
+              Wisatawan di Sigap Wisata membaca data terbaru dari endpoint yang sama.
             </p>
           </div>
         </div>
