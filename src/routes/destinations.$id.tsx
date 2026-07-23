@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useRouter, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SigapLayout } from "@/components/SigapLayout";
 import { crowdMeta, destinations, formatIDR, type Destination } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,68 @@ export const Route = createFileRoute("/destinations/$id")({
 });
 
 function DestDetail() {
-  const d = Route.useLoaderData() as Destination;
+  const base = Route.useLoaderData() as Destination;
+  const [override, setOverride] = useState<null | {
+    ticketPrice?: number;
+    capacity?: number;
+    occupancy?: number;
+    weatherNote?: string;
+    facilities?: Destination["facilities"];
+    menu?: Destination["menu"];
+    updatedAt?: string;
+  }>(null);
+
+  // Pull live overlay from MitraPoin via the public API gateway.
+  useState(() => 0); // placeholder to keep import
+  if (typeof window !== "undefined") {
+    // fetch once per mount
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+  }
+
+  // Merge base + override for display
+  const d: Destination = {
+    ...base,
+    ticketPrice: override?.ticketPrice ?? base.ticketPrice,
+    facilities: override?.facilities ?? base.facilities,
+    menu: override?.menu ?? base.menu,
+    crowd: {
+      ...base.crowd,
+      capacity: override?.capacity ?? base.crowd.capacity,
+      occupancy: override?.occupancy ?? base.crowd.occupancy,
+      updatedAt: override?.updatedAt
+        ? new Date(override.updatedAt).toLocaleTimeString("id-ID")
+        : base.crowd.updatedAt,
+      level: (() => {
+        const cap = override?.capacity ?? base.crowd.capacity;
+        const occ = override?.occupancy ?? base.crowd.occupancy;
+        const r = cap ? occ / cap : 0;
+        if (r >= 0.9) return "sangat_padat";
+        if (r >= 0.7) return "padat";
+        if (r >= 0.35) return "sedang";
+        return "sepi";
+      })(),
+    },
+    weather: {
+      ...base.weather,
+      warning: override?.weatherNote
+        ? { level: "watch", message: override.weatherNote }
+        : base.weather.warning,
+    },
+  };
+
+  useEffect(() => {
+    let alive = true;
+    fetch(`/api/public/destinations/${base.id}`)
+      .then((r) => r.json())
+      .then((j) => {
+        if (alive && j?.override) setOverride(j.override);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [base.id]);
+
   const router = useRouter();
   const c = crowdMeta[d.crowd.level];
   const pct = Math.round((d.crowd.occupancy / d.crowd.capacity) * 100);
