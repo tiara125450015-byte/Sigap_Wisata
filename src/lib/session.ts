@@ -66,6 +66,15 @@ export type BusinessApplication = {
   category: string;
   price: number;
   facilities: string;
+  capacity?: number;
+  tempMin?: number;
+  tempMax?: number;
+  ageMin?: number;
+  ageMax?: number;
+  weightMax?: number;
+  heightMin?: number;
+  heightMax?: number;
+  healthRestrictions?: string;
   responsibleName: string;
   responsibleNIK: string;
   certificate: string;
