@@ -23,6 +23,15 @@ function RegBiz() {
     category: "wisata_alam",
     price: 0,
     facilities: "",
+    capacity: 0,
+    tempMin: 20,
+    tempMax: 32,
+    ageMin: 0,
+    ageMax: 0,
+    weightMax: 0,
+    heightMin: 0,
+    heightMax: 0,
+    healthRestrictions: "",
     responsibleName: "",
     responsibleNIK: "",
     certificate: "",
@@ -122,6 +131,62 @@ function RegBiz() {
                     Harga akan ditampilkan realtime untuk mencegah pungli.
                   </p>
                 </div>
+
+                <div className="md:col-span-2 pt-2">
+                  <div className="text-sm font-semibold">Kapasitas & Kondisi Aman</div>
+                  <p className="text-[11px] text-muted-foreground">
+                    Dipakai sistem untuk membatasi booking & memberi peringatan cuaca.
+                  </p>
+                </div>
+                <div className="space-y-1.5">
+                  <Label>Kapasitas Wisatawan (per hari)</Label>
+                  <Input type="number" min={0} value={form.capacity} onChange={(e) => set("capacity", +e.target.value)} placeholder="Mis. 1500" />
+                </div>
+                <div className="space-y-1.5">
+                  <Label>Rentang Suhu Aman (°C)</Label>
+                  <div className="flex items-center gap-2">
+                    <Input type="number" value={form.tempMin} onChange={(e) => set("tempMin", +e.target.value)} placeholder="Min" />
+                    <span className="text-muted-foreground">–</span>
+                    <Input type="number" value={form.tempMax} onChange={(e) => set("tempMax", +e.target.value)} placeholder="Maks" />
+                  </div>
+                </div>
+
+                <div className="md:col-span-2 pt-2">
+                  <div className="text-sm font-semibold">Syarat Masuk Wisatawan</div>
+                  <p className="text-[11px] text-muted-foreground">
+                    Kosongkan (0) jika tidak ada batasan.
+                  </p>
+                </div>
+                <div className="space-y-1.5">
+                  <Label>Batas Umur (tahun)</Label>
+                  <div className="flex items-center gap-2">
+                    <Input type="number" min={0} value={form.ageMin} onChange={(e) => set("ageMin", +e.target.value)} placeholder="Min" />
+                    <span className="text-muted-foreground">–</span>
+                    <Input type="number" min={0} value={form.ageMax} onChange={(e) => set("ageMax", +e.target.value)} placeholder="Maks" />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <Label>Batas Berat Badan Maks (kg)</Label>
+                  <Input type="number" min={0} value={form.weightMax} onChange={(e) => set("weightMax", +e.target.value)} placeholder="Mis. 120" />
+                </div>
+                <div className="space-y-1.5 md:col-span-2">
+                  <Label>Rentang Tinggi Badan (cm)</Label>
+                  <div className="flex items-center gap-2">
+                    <Input type="number" min={0} value={form.heightMin} onChange={(e) => set("heightMin", +e.target.value)} placeholder="Min" />
+                    <span className="text-muted-foreground">–</span>
+                    <Input type="number" min={0} value={form.heightMax} onChange={(e) => set("heightMax", +e.target.value)} placeholder="Maks" />
+                  </div>
+                </div>
+                <div className="space-y-1.5 md:col-span-2">
+                  <Label>Riwayat Penyakit yang Tidak Disarankan</Label>
+                  <Textarea
+                    rows={3}
+                    placeholder="Contoh: jantung, asma berat, hipertensi tidak terkontrol, vertigo, ibu hamil trimester akhir"
+                    value={form.healthRestrictions}
+                    onChange={(e) => set("healthRestrictions", e.target.value)}
+                  />
+                </div>
+
                 <div className="md:col-span-2 flex justify-end">
                   <Button onClick={() => setStep(2)} className="bg-brand text-brand-foreground hover:bg-brand/90">
                     Lanjut
